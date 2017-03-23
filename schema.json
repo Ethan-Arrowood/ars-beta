@@ -1,0 +1,83 @@
+{
+  "users": {
+    "$id": {
+      "personalInfo": {
+        "name": "$name",
+        "email": "$email",
+        "address": "$address"
+      },
+      "children": [ "$id1", "$id2" ],
+      "contact": {
+        "$id": {
+          "order": "$order",
+          "name": "$name",
+          "email": "$email",
+          "phoneNumber": "$phoneNumber"
+        },
+        "$id": {
+          "content": "same as above"
+        }
+      }
+    },
+    "$id": {
+      "content": "same as above"
+    },
+    "$id": {
+      "content": "same as above"
+    }
+  },
+  "children": {
+    "$id": {
+      "name": "$name",
+      "age": "$age",
+      "gender": "$gender",
+      "grade": "$grade",
+      "attendingCamp": {
+        "$programA": "$isAttending",
+        "$programB": "$isAttending"
+      },
+      "hasPaid": {
+        "$programA": "$hasPaid",
+        "$programB": "$hasPaid"
+      }
+    },
+    "$id": {
+      "name": "$name",
+      "age": "$age",
+      "gender": "$gender",
+      "grade": "$grade",
+      "attendingCamp": {
+        "$programA": "$isAttending",
+        "$programB": "$isAttending"
+      },
+      "hasPaid": {
+        "$programA": "$hasPaid",
+        "$programB": "$hasPaid"
+      }
+    }
+  },
+  "programs": {
+    "$id": {
+      "name": "$name",
+      "startDate": "$startDate",
+      "endDate": "$endDate",
+      "isOvernight": "$isOvernight",
+      "gender": "$gender",
+      "summerCamp": "$summerCamp",
+      "foundation": "$foundation",
+      "activities": {
+        "$id": {
+          "name": "$name",
+          "description": "$description"
+        },
+        "$id": {
+          "content": "same as above"
+        }
+      },
+      "currentlyEnrolledCampers": [
+        "$id", "$id2", "$id3", "$idN"
+      ],
+
+    }
+  }
+}
