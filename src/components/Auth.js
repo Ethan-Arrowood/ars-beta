@@ -16,7 +16,7 @@ export default class Auth extends React.Component {
             <ReactCSSTransitionGroup component="div" transitionName="auth">
               {this.props.children}
             </ReactCSSTransitionGroup>
-            
+
             <Tabs>
               <Tab label="Log In" onActive={
                 () => browserHistory.push("/login")

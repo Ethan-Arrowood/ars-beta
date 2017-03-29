@@ -6,6 +6,15 @@ import FlatButton from 'material-ui/FlatButton';
 import { green500 } from 'material-ui/styles/colors';
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      emailError: undefined,
+      passwordError: undefined
+    }
+  }
+  
   handleSubmit(e) {
     let email = e.target.email.value;
     let password = e.target.password.value;
@@ -16,12 +25,38 @@ export default class Login extends React.Component {
       browserHistory.push('/dashboard');
     }).catch((e) => {
       let errorCode = e.code;
-      let errorMessage = e.message;
-      console.log('Code: ', errorCode, ' /nMessage: ', errorMessage);
+
+      let emailError, passwordError;
+
+      switch (errorCode) {
+        case "auth/wrong-password":
+          passwordError = 'Incorrect password.';
+          break;
+        case "auth/user-not-found":
+          emailError = "User does not exist";
+          break;
+        case "auth/invalid-email":
+          emailError = "Enter a valid email address";
+          break;
+        case "auth/user-disabled":
+          emailError = "This user has been disabled";
+          break;
+        default:
+          emailError = "Something is not working in Login.js";
+          passwordError = "Something is not working in Login.js";
+          break;
+      }
+
+      this.setState({
+        emailError,
+        passwordError
+      });
+
     });
 
 
   }
+
   render() {
     const buttonStyle = {
       "marginTop": "1rem",
@@ -30,15 +65,18 @@ export default class Login extends React.Component {
       "borderColor": green500
     };
 
+    let { emailError, passwordError } = this.state;
+
     return (
       <div className="auth__inner">
         <h1>Welcome!</h1>
-        <h1>Please Login:</h1>
+        <h1>Please login:</h1>
         <form className="auth__form" onSubmit={this.handleSubmit.bind(this)}>
           <TextField
             name="email"
             type="email"
             hintText="your@email.com"
+            errorText={emailError}
             floatingLabelText="Email"
             className="auth__input"
           />
@@ -48,6 +86,7 @@ export default class Login extends React.Component {
             hintText="Password"
             floatingLabelText="Password"
             className="auth__input"
+            errorText={passwordError}
           />
           <FlatButton
             label="Login"
