@@ -20,16 +20,18 @@ input:-webkit-autofill {
   padding: 1rem; }
 
 .auth__inner {
-  max-width: 90%;
-  width: 450px;
+  min-width: 90%;
+  width: 60vw;
+  min-height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 1rem; }
-  .auth__inner h1 {
-    margin: 5px auto;
-    color: #4CAF50; }
+
+.auth__inner h1 {
+  margin: 5px auto;
+  color: #4CAF50; }
 
 .auth__form {
   display: flex;
@@ -43,19 +45,12 @@ input:-webkit-autofill {
 .auth__link {
   margin: 5px; }
 
-.auth-enter {
-  opacity: 0.01; }
+.fire {
+  height: 100px; }
 
-.auth-enter.auth-enter-active {
+.auth-animate {
   opacity: 1;
   transition: opacity 500ms ease-in; }
-
-.auth-leave {
-  opacity: 1; }
-
-.auth-leave.auth-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in; }
 
 .container-dashboard h1 {
   color: blue; }

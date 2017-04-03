@@ -8,6 +8,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "bodymovin": "^4.6.1",
     "firebase": "^3.7.2",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",

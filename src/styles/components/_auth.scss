@@ -14,8 +14,9 @@
 }
 
 .auth__inner {
-  max-width: 90%;
-  width: 450px;
+  min-width: 90%;
+  width: 60vw;
+  min-height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,20 +43,11 @@
   margin: 5px;
 }
 
-.auth-enter {
-  opacity: 0.01;
+.fire {
+  height: 100px;
 }
 
-.auth-enter.auth-enter-active {
+.auth-animate {
   opacity: 1;
   transition: opacity 500ms ease-in;
-}
-
-.auth-leave {
-  opacity: 1;
-}
-
-.auth-leave.auth-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
 }

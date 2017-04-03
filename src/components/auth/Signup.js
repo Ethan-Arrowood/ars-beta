@@ -59,9 +59,6 @@ export default class Signup extends React.Component {
          confirmPasswordError: "Passwords do not match"
        })
     }
-
-
-
   }
 
   render() {
@@ -79,7 +76,6 @@ export default class Signup extends React.Component {
 
     return (
       <div className="auth__inner">
-        <h1>Welcome!</h1>
         <h1>Please sign up:</h1>
         <form className="auth__form" onSubmit={this.handleSubmit.bind(this)}>
           <TextField
