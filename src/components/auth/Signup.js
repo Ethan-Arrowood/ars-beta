@@ -4,6 +4,7 @@ import firebase from '../../firebaseConfig.js';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import { green500 } from 'material-ui/styles/colors';
+import Dialog from 'material-ui/Dialog';
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -12,10 +13,20 @@ export default class Signup extends React.Component {
     this.state = {
       emailError: undefined,
       passwordError: undefined,
-      confirmPasswordError: undefined
+      confirmPasswordError: undefined,
+      open: false
     }
-  }
 
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+  handleOpen() {
+    this.setState({open: true});
+  }
+  handleClose() {
+    this.setState({open: false});
+    browserHistory.push('/login');
+  }
   handleSubmit(e) {
     let email = e.target.email.value;
     let password = e.target.password.value;
@@ -25,7 +36,7 @@ export default class Signup extends React.Component {
 
     if ( password === confirmPassword ) {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-        browserHistory.push('/verifyaccount');
+        this.handleOpen();
       }).catch((e) => {
         let errorCode = e.code;
 
@@ -74,6 +85,14 @@ export default class Signup extends React.Component {
       passwordError,
       confirmPasswordError } = this.state;
 
+    const actions = [
+      <FlatButton
+        label="Close"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose}
+      />
+    ]
     return (
       <div className="auth__inner">
         <h1>Please sign up:</h1>
@@ -117,6 +136,16 @@ export default class Signup extends React.Component {
             onTouchTap={() => console.log('Button Pressed')}
           />
         </form>
+
+        <Dialog
+          title="Verify Account"
+          actions={actions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+          Please Verify Your Account Dude
+        </Dialog>
       </div>
     );
   }

@@ -3,8 +3,8 @@ import { browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
-
 import bodymovin from 'bodymovin';
+
 import firedata from './auth/data.json';
 
 export default class Auth extends React.Component {
@@ -12,20 +12,32 @@ export default class Auth extends React.Component {
     super(props);
 
     this.state = {
-      tab: 0
+      tab: this.detCurTab(props.location.pathname)
     }
 
+    this.detCurTab = this.detCurTab.bind(this);
     this.renderTabs = this.renderTabs.bind(this);
+    this.renderTabList = this.renderTabList.bind(this);
+  }
+  renderTabList() {
+    const path = this.props.location.pathname;
+    console.log('RenderTabList path: ', path);
+    const tabNum = this.detCurTab(path);
+    console.log('RenderTabList tabNum: ', tabNum);
+    return (
+      <Tabs
+        initialSelectedIndex={tabNum}
+        contentContainerClassName="auth-animate">
+        {this.renderTabs()}
+      </Tabs>
+    );
+
   }
   renderTabs() {
-    const path = this.props.location.pathname;
     let list = [
       { label: "Log In", path: "/login" },
       { label: "Sign Up", path: "/signup" },
       { label: "Forgot Password", path: "/forgotpassword" } ];
-    const vA = { label: "Verify Account", path: "/verifyaccount" };
-    if ( path === "/verifyaccount" ) list.push(vA);
-
     return list.map((tab, i) => {
       const {label, path} = tab;
       return (
@@ -34,10 +46,8 @@ export default class Auth extends React.Component {
         }></Tab>
       )
     });
-
   }
-  componentWillMount() {
-    const path = this.props.location.pathname;
+  detCurTab(path) {
     let tab = 0;
     switch (path) {
       case "/login":
@@ -49,15 +59,11 @@ export default class Auth extends React.Component {
       case "/forgotpassword":
         tab = 2;
         break;
-      case "/verifyaccount":
-        tab = 3;
-        break;
       default:
-        tab = 0;
+        tab = -1;
         break;
     }
-    this.setState({ tab });
-    console.log(path);
+    return tab;
   }
   componentDidMount() {
     bodymovin.loadAnimation({
@@ -68,22 +74,24 @@ export default class Auth extends React.Component {
       animationData: firedata
     });
   }
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps executed');
+    const path = nextProps.location.pathname;
+    this.setState({
+      tab: this.detCurTab(path)
+    });
+  }
   render() {
-
+    console.log('render executed');
+    console.log('The state: ', this.state);
     return (
       <div className="auth">
         <AppBar title="Camp Arrowood"/>
         <div className="auth__wrapper">
           <Paper zDepth={2} rounded={false}>
-
             <div id="fire" className="fire"/>
-
             {this.props.children}
-            <Tabs
-              initialSelectedIndex={this.state.tab}
-              contentContainerClassName="auth-animate">
-              {this.renderTabs()}
-            </Tabs>
+            {this.renderTabList()}
           </Paper>
         </div>
       </div>

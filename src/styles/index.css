@@ -28,10 +28,9 @@ input:-webkit-autofill {
   justify-content: center;
   align-items: center;
   padding: 1rem; }
-
-.auth__inner h1 {
-  margin: 5px auto;
-  color: #4CAF50; }
+  .auth__inner h1 {
+    margin: 5px auto;
+    color: #4CAF50; }
 
 .auth__form {
   display: flex;
