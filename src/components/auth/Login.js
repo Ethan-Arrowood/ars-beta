@@ -94,7 +94,7 @@ export default class Login extends React.Component {
             className="auth__button"
             style={buttonStyle}
             type="submit"
-            onTouchTap={() => console.log('Button Pressed')}
+            onTouchTap={() => {}}
           />
         </form>
       </div>

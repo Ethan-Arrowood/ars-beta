@@ -21,9 +21,7 @@ export default class Auth extends React.Component {
   }
   renderTabList() {
     const path = this.props.location.pathname;
-    console.log('RenderTabList path: ', path);
     const tabNum = this.detCurTab(path);
-    console.log('RenderTabList tabNum: ', tabNum);
     return (
       <Tabs
         initialSelectedIndex={tabNum}
@@ -31,7 +29,6 @@ export default class Auth extends React.Component {
         {this.renderTabs()}
       </Tabs>
     );
-
   }
   renderTabs() {
     let list = [
@@ -75,15 +72,12 @@ export default class Auth extends React.Component {
     });
   }
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps executed');
     const path = nextProps.location.pathname;
     this.setState({
       tab: this.detCurTab(path)
     });
   }
   render() {
-    console.log('render executed');
-    console.log('The state: ', this.state);
     return (
       <div className="auth">
         <AppBar title="Camp Arrowood"/>

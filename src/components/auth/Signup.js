@@ -68,7 +68,7 @@ export default class Signup extends React.Component {
     } else {
        this.setState({
          confirmPasswordError: "Passwords do not match"
-       })
+       });
     }
   }
 
@@ -133,7 +133,7 @@ export default class Signup extends React.Component {
             className="auth__button"
             style={buttonStyle}
             type="submit"
-            onTouchTap={() => console.log('Button Pressed')}
+            onTouchTap={() => {}}
           />
         </form>
 
