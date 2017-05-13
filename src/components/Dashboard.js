@@ -1,9 +1,20 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import Phone from 'material-ui/svg-icons/communication/phone';
+import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
 import firebase from '../firebaseConfig.js';
 
 export default class Dashboard extends React.Component {
-  handleClick(e) {
+  handleHomeClick(e) {
+    browserHistory.push('/dashboard');
+  }
+  handleSignOut(e) {
 
     firebase.auth().signOut().then(() => {
       browserHistory.push('/');
@@ -16,10 +27,29 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="container-dashboard">
-        <h1>Hello from Dashboard</h1>
-        <button
-          className="button"
-          onClick={this.handleClick.bind(this)}>Log Out</button>
+        <AppBar
+          title="Dashboard"
+          iconElementLeft={
+            <IconButton onTouchTap={this.handleHomeClick.bind(this)}>
+              <ActionHome/>
+            </IconButton>
+          }
+          iconElementRight={
+            <IconMenu
+              iconButtonElement={
+                <IconButton><MoreVertIcon/></IconButton>
+              }
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            >
+              <MenuItem primaryText="Contact" leftIcon={<Phone/>}/>
+              <MenuItem primaryText="Help" />
+              <MenuItem primaryText="Sign Out" leftIcon={<ExitToApp/>} onTouchTap={this.handleSignOut.bind(this)}/>
+            </IconMenu>
+          }
+        />
+
+
       </div>
     );
   }

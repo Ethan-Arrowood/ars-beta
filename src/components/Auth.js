@@ -1,6 +1,8 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import bodymovin from 'bodymovin';
@@ -77,10 +79,22 @@ export default class Auth extends React.Component {
       tab: this.detCurTab(path)
     });
   }
+  handleClick(e) {
+    browserHistory.push('/');
+  }
   render() {
     return (
       <div className="auth">
-        <AppBar title="Camp Arrowood"/>
+        <AppBar
+          title="Camp Arrowood"
+          iconElementLeft={
+            <IconButton
+              onTouchTap={this.handleClick.bind(this)}
+            >
+              <ActionHome/>
+            </IconButton>
+          }
+        />
         <div className="auth__wrapper">
           <Paper zDepth={2} rounded={false}>
             <div id="fire" className="fire"/>
